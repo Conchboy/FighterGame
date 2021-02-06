@@ -33,6 +33,11 @@ while True:
     # 1. 设置刷新率(帧数 = 60)
     # tick方法可以定义循环体内部的代码执行的频率
     clock.tick(60)
+
+    # 捕获事件
+    event_list = pygame.event.get()
+    if len(event_list) > 0:
+        print(event_list)
     # 2. 检测用户交互,
     if hero_rect.y > -hero_rect.height:
         hero_rect.y -= 2

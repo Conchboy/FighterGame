@@ -33,6 +33,15 @@ while True:
     # 1. 设置刷新率(帧数 = 60)
     # tick方法可以定义循环体内部的代码执行的频率
     clock.tick(60)
+
+    # 捕获事件
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            print("游戏退出...")
+            # 卸载所有模块
+            pygame.quit()
+            exit()
+
     # 2. 检测用户交互,
     if hero_rect.y > -hero_rect.height:
         hero_rect.y -= 2
