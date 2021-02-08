@@ -1,8 +1,8 @@
 def static_vars(**kwargs):
-    def decorate(func):
+    def decorate(fun):
         for k in kwargs:
-            setattr(func, k, kwargs[k])
-        return func
+            setattr(fun, k, kwargs[k])
+        return fun
     return decorate
 
 
@@ -10,6 +10,7 @@ def static_vars(**kwargs):
 
 
 def fun(n):
+    f = 1
     fun.f *= n
     return fun.f
 
