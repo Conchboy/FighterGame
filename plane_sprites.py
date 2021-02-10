@@ -1,4 +1,6 @@
 import pygame
+# 屏幕大小的常量
+SCREEN_RECT = pygame.Rect(0, 0, 480, 700)
 
 
 class GameSprite(pygame.sprite.Sprite):
