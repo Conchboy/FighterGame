@@ -28,7 +28,7 @@ class Background(GameSprite):
 
         # 2. 判断是否是交替图像, 如果是,需要设置初始位置
         if is_alt:
-            self.rect.y = - self.rect.y
+            self.rect.y = - SCREEN_RECT.height
 
     def update(self):
         pass
