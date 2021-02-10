@@ -31,7 +31,6 @@ class Background(GameSprite):
             self.rect.y = - SCREEN_RECT.height
 
     def update(self):
-        pass
         #  1. 调用父类的方法实现
         super().update()
         # 2. 判断是否移出屏幕, 如果移出屏幕, 那么将图像设置到屏幕的上方

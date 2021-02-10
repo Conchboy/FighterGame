@@ -3,15 +3,15 @@ from plane_sprites import *
 
 
 class PlaneGame(object):
-    """飞机大战主游戏"""
+    """飞机大战主程序"""
 
     def __init__(self):
         print("游戏初始化")
-        # 创建游戏窗口
+        # 创建游戏窗口 (空间)
         self.screen = pygame.display.set_mode(SCREEN_RECT.size)
-        # 创建游戏时钟
+        # 创建游戏时钟 (时间)
         self.clock = pygame.time.Clock()
-        # 创建游戏精灵角色, 调用私有方法
+        # 创建游戏精灵角色, 调用私有方法 (角色)
         self.__create_sprites()
 
     def __create_sprites(self):
@@ -20,6 +20,18 @@ class PlaneGame(object):
         background2 = Background(True)
 
         self.back_group = pygame.sprite.Group(background1, background2)
+
+        # 2. 创建敌人精灵和精灵组
+        plane_sprites = GameSprite("./images/enemy1.png")
+        plane_sprites1 = GameSprite("./images/enemy1.png")
+        plane_sprites2 = GameSprite("./images/enemy1.png")
+        self.sprites_group = pygame.sprite.Group(plane_sprites, plane_sprites2, plane_sprites1)
+
+        # 3. 创建英雄
+        self.hero = GameSprite("./images/me1.png", speed=2)
+        self.hero.rect.y = SCREEN_RECT.height
+
+
 
     def start_game(self):
         print("游戏开始...")
@@ -47,9 +59,12 @@ class PlaneGame(object):
     def __update_sprites(self):
         self.back_group.update()
         self.back_group.draw(self.screen)
+        self.sprites_group.update()
+        self.sprites_group.draw(self.screen)
+        self.hero.update()
 
     @staticmethod
-    def __game_over(self):
+    def __game_over():
         print("游戏结束")
         pygame.quit()
         exit()
