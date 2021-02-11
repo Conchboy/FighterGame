@@ -16,6 +16,8 @@ class PlaneGame(object):
         self.__create_sprites()
         # 设置定时器事件 -- 为了每秒创建敌机
         pygame.time.set_timer(CREATE_ENEMY_EVENT, 1000)
+        # 设置定时器事件 -- 为了英雄没半秒发射三发子弹
+        pygame.time.set_timer(HERO_SHOOT_EVENT, 500)
 
     def __create_sprites(self):
         # 1. 创建背景精灵和精灵组
@@ -50,13 +52,15 @@ class PlaneGame(object):
             # 1. 判断是否退出游戏
             if event.type == pygame.QUIT:
                 PlaneGame.__game_over()
+
             elif event.type == CREATE_ENEMY_EVENT:
                 # 创建敌机精灵
                 enemy = Enemy()
                 # 将敌机精灵添加到敌机精灵组
                 self.sprites_group.add(enemy)
-            # elif event.type == pygame.KEYDOWN and event.key == pygame.K_RIGHT:
-            #     print("向右移动...")
+            # 判断英雄发射子弹
+            elif event.type == HERO_SHOOT_EVENT:
+                self.hero.shoot()
         # 使用键盘提供的方法获取键盘按键 - 按键元组 (可以始终捕获按下的键值, 不用等待抬起, 重新按键)
         keys_pressed = pygame.key.get_pressed()
         # 判断元祖中对应的按键索引值"1"
@@ -75,9 +79,10 @@ class PlaneGame(object):
         self.back_group.draw(self.screen)
         self.sprites_group.update()
         self.sprites_group.draw(self.screen)
-        # self.hero.update()
         self.hero_group.update()
         self.hero_group.draw(self.screen)
+        self.hero.bullet_group.update()
+        self.hero.bullet_group.draw(self.screen)
 
     @staticmethod
     def __game_over():
