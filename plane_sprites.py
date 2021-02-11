@@ -27,7 +27,7 @@ class GameSprite(pygame.sprite.Sprite):
 
 class Background(GameSprite):
     def __init__(self, is_alt=False):
-        # 1. 调用父类方法实现精灵的创建(image/rect/speed)
+        # 1. 调用父类方法实现背景的创建(image/rect/speed)
         super().__init__("./images/background.png")
 
         # 2. 判断是否是交替图像, 如果是,需要设置初始位置
@@ -41,10 +41,20 @@ class Background(GameSprite):
         if self.rect.y >= SCREEN_RECT.height:
             self.rect.y = -SCREEN_RECT.height
 
-#
-# class Enemy(GameSprite):
-#     # 初始化Enemy类
-#     def __init__(self):
-#         super().__init__("./images/enemy1.png")
-#     # 确定出生的横坐标
-#         self.rect.x = random.randint(0, 480)
+
+class Enemy(GameSprite):
+    """敌机精灵"""
+    # 初始化Enemy类
+    def __init__(self):
+        # 调用父类的初始化方法, 创建敌机精灵, 并确定敌机的图像
+        super().__init__("./images/enemy1.png")
+    # 重写speed和x轴的随机位置 (我感觉应该在对象中实现)
+        self.rect.x = random.randint(20, 450)
+        self.speed = random.randint(1, 5)
+
+    def update(self):
+        # 1. 调用父类的方法实现
+        super().update()
+        # 2. 判断是否敌机飞出了屏幕, 如果飞出则删除对象释放内存
+        if self.rect.y > SCREEN_RECT.height:
+            del self
