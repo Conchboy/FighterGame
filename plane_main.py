@@ -1,5 +1,5 @@
-from plane_sprites import *
 import pygame
+from plane_sprites import *
 
 
 class PlaneGame(object):
@@ -51,9 +51,10 @@ class PlaneGame(object):
             if event.type == pygame.QUIT:
                 PlaneGame.__game_over()
             elif event.type == CREATE_ENEMY_EVENT:
-                enemy1 = Enemy()
-                self.sprites_group.add(enemy1)
-                print("敌机出现....")
+                # 创建敌机精灵
+                enemy = Enemy()
+                # 将敌机精灵添加到敌机精灵组
+                self.sprites_group.add(enemy)
 
     def __check_collision(self):
         pass

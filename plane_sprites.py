@@ -1,5 +1,6 @@
-import pygame
 import random
+import pygame
+
 
 # 屏幕大小的常量
 SCREEN_RECT = pygame.Rect(0, 0, 480, 700)
@@ -48,13 +49,14 @@ class Enemy(GameSprite):
     def __init__(self):
         # 调用父类的初始化方法, 创建敌机精灵, 并确定敌机的图像
         super().__init__("./images/enemy1.png")
-    # 重写speed和x轴的随机位置 (我感觉应该在对象中实现)
-        self.rect.x = random.randint(20, 450)
-        self.speed = random.randint(1, 5)
+        # 重写speed, y轴出现位置bottom=0, 以及x轴的随机位置 (我感觉应该在对象中实现)
+        self.rect.x = random.randint(0, SCREEN_RECT.width-self.rect.width)
+        self.rect.bottom = 0
+        self.speed = random.randint(1, 3)
 
     def update(self):
-        # 1. 调用父类的方法实现
+        # 1. 调用父类的方法, 保持垂直方向上飞行
         super().update()
         # 2. 判断是否敌机飞出了屏幕, 如果飞出则删除对象释放内存
-        if self.rect.y > SCREEN_RECT.height:
+        if self.rect.y >= SCREEN_RECT.height:
             del self
