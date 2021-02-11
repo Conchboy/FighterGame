@@ -59,4 +59,40 @@ class Enemy(GameSprite):
         super().update()
         # 2. 判断是否敌机飞出了屏幕, 如果飞出则删除对象释放内存
         if self.rect.y >= SCREEN_RECT.height:
-            del self
+            self.kill()
+
+    def __del__(self):
+        # print("敌机挂了 %s" % self.rect)
+        pass
+
+
+class Hero(GameSprite):
+    """英雄精灵类"""
+    def __init__(self):
+        # 调用父类的初始化方法, 加载图像, 默认速度为0
+        super().__init__("./images/me1.png", speed=0)
+        # 定义英雄的初始位置:
+        # x方向在屏幕的中心;
+        self.rect.centerx = SCREEN_RECT.centerx
+        # Y方向距离屏幕底部120像素
+        self.rect.bottom = SCREEN_RECT.height - 120
+
+    def update(self):
+        # 英雄需要水平移动, 且不能移出屏幕
+        self.rect.x += self.speed
+
+        # 英雄每隔0.5秒发射一次, 每次三颗子弹
+        # 使用计时器触发发射
+
+        def shoot():
+            pass
+
+
+class Bullet(GameSprite):
+    """子弹类"""
+    def __init__(self):
+        super().__init__("./images/bullet.png", speed=-1)
+
+    def update(self):
+        if self.rect.y <= 0:
+            self.kill()
