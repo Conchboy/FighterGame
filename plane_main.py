@@ -1,18 +1,21 @@
-import pygame
 from plane_sprites import *
+import pygame
 
 
 class PlaneGame(object):
     """飞机大战主程序"""
 
     def __init__(self):
-        print("游戏初始化")
+        pygame.init()
+        pygame.display.set_caption("飞机大战来一局")
         # 创建游戏窗口 (空间)
         self.screen = pygame.display.set_mode(SCREEN_RECT.size)
         # 创建游戏时钟 (时间)
         self.clock = pygame.time.Clock()
         # 创建游戏精灵角色, 调用私有方法 (角色)
         self.__create_sprites()
+        # 设置定时器事件 -- 为了每秒创建敌机
+        pygame.time.set_timer(CREATE_ENEMY_EVENT, 1000)
 
     def __create_sprites(self):
         # 1. 创建背景精灵和精灵组
@@ -22,16 +25,15 @@ class PlaneGame(object):
         self.back_group = pygame.sprite.Group(background1, background2)
 
         # 2. 创建敌人精灵和精灵组
-        plane_sprites = GameSprite("./images/enemy1.png")
-        plane_sprites1 = GameSprite("./images/enemy1.png")
-        plane_sprites2 = GameSprite("./images/enemy1.png")
-        self.sprites_group = pygame.sprite.Group(plane_sprites, plane_sprites2, plane_sprites1)
+        # enemy1 = Enemy()
+        # enemy2 = Enemy()
+        # enemy3 = Enemy()
+
+        # self.enemy_group = pygame.sprite.Group(enemy3, enemy2, enemy1)
 
         # 3. 创建英雄
-        self.hero = GameSprite("./images/me1.png", speed=2)
-        self.hero.rect.y = SCREEN_RECT.height
-
-
+        # self.hero = GameSprite("./images/me1.png", speed=2)
+        # self.hero.rect.y = SCREEN_RECT.height
 
     def start_game(self):
         print("游戏开始...")
@@ -52,6 +54,8 @@ class PlaneGame(object):
             # 1. 判断是否退出游戏
             if event.type == pygame.QUIT:
                 PlaneGame.__game_over()
+            elif event.type == CREATE_ENEMY_EVENT:
+                print("敌机出场...")
 
     def __check_collision(self):
         pass
@@ -59,9 +63,9 @@ class PlaneGame(object):
     def __update_sprites(self):
         self.back_group.update()
         self.back_group.draw(self.screen)
-        self.sprites_group.update()
-        self.sprites_group.draw(self.screen)
-        self.hero.update()
+        # self.sprites_group.update()
+        # self.sprites_group.draw(self.screen)
+        # self.hero.update()
 
     @staticmethod
     def __game_over():

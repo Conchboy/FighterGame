@@ -1,8 +1,12 @@
 import pygame
+import random
+
 # 屏幕大小的常量
 SCREEN_RECT = pygame.Rect(0, 0, 480, 700)
 # 刷新的帧率
 FRAME_PER_SECOND = 60
+# 创建敌机的定时器常量
+CREATE_ENEMY_EVENT = pygame.USEREVENT
 
 
 class GameSprite(pygame.sprite.Sprite):
@@ -36,3 +40,11 @@ class Background(GameSprite):
         # 2. 判断是否移出屏幕, 如果移出屏幕, 那么将图像设置到屏幕的上方
         if self.rect.y >= SCREEN_RECT.height:
             self.rect.y = -SCREEN_RECT.height
+
+#
+# class Enemy(GameSprite):
+#     # 初始化Enemy类
+#     def __init__(self):
+#         super().__init__("./images/enemy1.png")
+#     # 确定出生的横坐标
+#         self.rect.x = random.randint(0, 480)
