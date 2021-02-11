@@ -80,7 +80,11 @@ class Hero(GameSprite):
     def update(self):
         # 英雄需要水平移动, 且不能移出屏幕
         self.rect.x += self.speed
-
+        # 控制英雄不能离开屏幕
+        if self.rect.x < 0:
+            self.rect.x = 0
+        elif self.rect.right > SCREEN_RECT.width:
+            self.rect.right = SCREEN_RECT.width
         # 英雄每隔0.5秒发射一次, 每次三颗子弹
         # 使用计时器触发发射
 
