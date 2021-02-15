@@ -29,7 +29,7 @@ class GameSprite(pygame.sprite.Sprite):
 
 
 class Background(GameSprite):
-    def __init__(self, is_alt=False):
+    def __init__(self, is_alt=False):  # is_alt 是判断第二屏图像的参数. 默认为False;
         # 1. 调用父类方法实现背景的创建(image/rect/speed)
         super().__init__("./images/background.png")
 
@@ -118,4 +118,3 @@ class Bullet(GameSprite):
 
     def __del__(self):
         pass
-        # print("子弹嗝屁了...")

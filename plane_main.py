@@ -18,12 +18,14 @@ class PlaneGame(object):
         pygame.time.set_timer(CREATE_ENEMY_EVENT, 1000)
         # 设置定时器事件 -- 为了英雄没半秒发射三发子弹
         pygame.time.set_timer(HERO_SHOOT_EVENT, 500)
+        # 设定游戏初始分 为0,
+        score_this_game = 0
+
 
     def __create_sprites(self):
         # 1. 创建背景精灵和精灵组
         background1 = Background()  # 这个background由于不用在外部调用, 所以不像下面的self.hero需要定义成属性
-        background2 = Background(True)
-
+        background2 = Background(True) # 这里使用True作为参数, 用于定义第二屏的连接和滚动效果. 详见plain_sprite的background的初始化重写.
         self.back_group = pygame.sprite.Group(background1, background2)
 
         # 2. 创建敌人精灵和精灵组
