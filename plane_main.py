@@ -32,7 +32,7 @@ class PlaneGame(object):
         self.sprites_group = pygame.sprite.Group()
 
         # 3. 创建英雄的精灵和精灵组
-        self.hero = Hero()  # 重要: hero对象需要在方法外部使用, 所以需要用self.hero来定义成属性
+        self.hero = Hero()  # 重要: hero对象需要在方法外部使用, 所以需要用self.hero来定义成属性(这个必须是一个指针变量, 好比C语言中的malloc)
         self.hero_group = pygame.sprite.Group(self.hero)  # 记得把self.hero传递到精灵组
 
     def start_game(self):
